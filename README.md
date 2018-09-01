@@ -27,7 +27,9 @@ royax(img1Path, img2Path, [,outputImgPath,  options])
 ```
 
 `img1Path`, `img2Path` — Path to image file (png files)
+
 `outputImgPath` — Path to place the output diff image, if it's not provided the write to disk will be omitted
+
 `options` is a Roya option object
 
 ## Usage
