@@ -1,17 +1,16 @@
 const path = require('path')
 const fs = require('fs')
 
-const diff = require('../main')
+const main = require('../main')
 
 const darkImgPath = path.resolve(__dirname, '../img/dark.png')
 const lightImgPath = path.resolve(__dirname, '../img/light.png')
-const mockPath = path.resolve(__dirname, '__mock__/dark.hex')
-const hex = fs.readFileSync(mockPath, 'utf8')
-const darkImgMockData = Buffer.from(hex, 'hex')
 
-describe('Diff | readImage', () => {
+const diffImgPath = path.resolve(__dirname, './diff.ignore.png')
+
+describe('Main | readImage', () => {
   it('should return expected schema', async () => {
-    const [err, result] = await diff(darkImgPath, darkImgPath)
+    const [err, result] = await main(darkImgPath, lightImgPath)
 
     expect(err).toBeFalsy()
     expect(result).toEqual(
@@ -23,27 +22,30 @@ describe('Diff | readImage', () => {
     )
   })
 
-  it('should return expected diff | no diff', async () => {
-    const [err, result] = await diff(darkImgPath, darkImgPath)
+  it('should return expected schema', async () => {
+    const [err, result] = await main(darkImgPath, lightImgPath, diffImgPath)
 
     expect(err).toBeFalsy()
     expect(result).toEqual(
       expect.objectContaining({
-        match: 1,
-        missmatch: 0
+        data: expect.any(Object),
+        match: expect.any(Number),
+        missmatch: expect.any(Number)
       })
     )
   })
 
-  it('should return expected diff | no diff', async () => {
-    const [err, result] = await diff(darkImgPath, lightImgPath)
+  it('should handle error | readImage 1', async () => {
+    const [err, result] = await main('invalid/path', lightImgPath, diffImgPath)
 
-    expect(err).toBeFalsy()
-    expect(result).toEqual(
-      expect.objectContaining({
-        match: 0,
-        missmatch: 1
-      })
-    )
+    expect(err).toBeTruthy()
+    expect(result).toBeFalsy()
+  })
+
+  it('should handle error | readImage 2', async () => {
+    const [err, result] = await main(lightImgPath, 'invalid/path', diffImgPath)
+
+    expect(err).toBeTruthy()
+    expect(result).toBeFalsy()
   })
 })

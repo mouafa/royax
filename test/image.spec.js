@@ -3,6 +3,8 @@ const fs = require('fs')
 
 const { readImage, writeImage } = require('../lib/image')
 const imgPath = path.resolve(__dirname, '../img/dark.png')
+const writeTo = path.resolve(__dirname, 'tmp.ignore.png')
+
 const mockPath = path.resolve(__dirname, '__mock__/dark.hex')
 const hex = fs.readFileSync(mockPath, 'utf8')
 const mockImgData = Buffer.from(hex, 'hex')
@@ -36,11 +38,28 @@ describe('Image | readImage', () => {
 })
 
 describe('Image | writeImage', () => {
-  it('should readImage properly', async () => {
-    const writeTo = path.resolve(__dirname, 'tmp.png')
+  it('should writeImage properly', async () => {
     const [err, done] = await writeImage(writeTo, { data: mockImgData, width: 10, height: 10 })
 
     expect(err).toBeFalsy()
     expect(done).toBeTruthy()
+  })
+
+  it('should not writeImage and return error | missing data', async () => {
+    const [err, img] = await writeImage(writeTo, {})
+
+    expect(err).toBeTruthy()
+    expect(err.toString()).toEqual(expect.stringContaining('No data provided'))
+
+    expect(img).toBeFalsy()
+  })
+
+  it('should not writeImage and return error | wrong path', async () => {
+    const [err, img] = await writeImage('', { data: mockImgData, width: 10, height: 10 })
+
+    expect(err).toBeTruthy()
+    expect(err.toString()).toEqual(expect.stringContaining('ENOENT'))
+
+    expect(img).toBeFalsy()
   })
 })

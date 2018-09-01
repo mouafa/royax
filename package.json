@@ -1,8 +1,11 @@
 {
-  "name": "pixeldiff",
+  "name": "royax",
   "version": "0.1.0",
-  "description": "pixeldiff",
+  "description": "roya wrapper",
   "main": "main.js",
+  "scripts": {
+    "test": "jest"
+  },
   "author": "mouafa",
   "license": "MIT",
   "dependencies": {
@@ -10,6 +13,28 @@
     "roya": "0.1.1"
   },
   "devDependencies": {
+    "coveralls": "3.0.2",
     "jest": "23.5.0"
-  }
+  },
+  "engines": {
+    "node": ">=8.11"
+  },
+  "keywords": [
+    "image",
+    "comparison",
+    "diff",
+    "pixel",
+    "regression"
+  ],
+  "files": [
+    "lib/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mouafa/roya.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mouafa/roya/issues"
+  },
+  "homepage": "https://github.com/mouafa/roya#readme"
 }
