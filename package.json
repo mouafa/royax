@@ -27,7 +27,8 @@
     "regression"
   ],
   "files": [
-    "lib/"
+    "lib/",
+    "testdrive/"
   ],
   "repository": {
     "type": "git",
