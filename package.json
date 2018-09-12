@@ -1,6 +1,6 @@
 {
   "name": "royax",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "roya wrapper",
   "main": "main.js",
   "scripts": {
@@ -10,7 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "pngjs": "3.3.3",
-    "roya": "0.1.1"
+    "roya": "1.1.0"
   },
   "devDependencies": {
     "coveralls": "3.0.2",
@@ -27,7 +27,8 @@
     "regression"
   ],
   "files": [
-    "lib/"
+    "lib/",
+    "testdrive/"
   ],
   "repository": {
     "type": "git",
