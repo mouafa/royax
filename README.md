@@ -1,4 +1,4 @@
-# RoyaX
+<p align="center"><img width="auto" src="https://raw.githubusercontent.com/mouafa/royax/master/assets/cover.png"></p>
 
 RoyaX, wrapper for Roya image diffing library
 
